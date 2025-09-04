@@ -9,7 +9,7 @@ requires-python = ">=3.8"
 # Deliberately specifying vulnerable/old dependencies
 dependencies = [
   "Flask==1.0",
-  "pyjwt==1.7.1",
+  "pyjwt==2.4.0",
   "requests==2.19.0"
 ]
 
