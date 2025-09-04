@@ -1,0 +1,73 @@
+# Dependency & License Compliance Review Workflow
+# 參考官方文件：
+# https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/configuring-the-dependency-review-action#configuring-the-dependency-review-github-action
+# 功能：
+# 1. 在 Pull Request 時解析新增/更新相依套件的差異。
+# 2. 檢查相依套件 License，阻擋不允許授權 (deny-licenses)。
+# 3. 可加上嚴重漏洞 (fail-on-severity) 及運行範圍 (fail-on-scopes) 控制。
+# 4. 於 PR 留言摘要 (comment-summary-in-pr) 方便審閱。
+
+name: Dependency & License Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  # 可選：排程定期偵測（非必要，可取消註解）
+  # schedule:
+  #   - cron: '0 2 * * 1'  # 每週一 02:00 UTC
+
+permissions:
+  contents: read          # 讀取 repo 內容
+  pull-requests: write    # 發 PR 留言需要
+
+jobs:
+  dependency-license-review:
+    name: License & Vulnerability Gate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Dependency Review (License + Vulnerability)
+        uses: actions/dependency-review-action@v4
+        with:
+          # License 規則：允許 / 禁止
+          # 若同時設定 allow-licenses 與 deny-licenses，deny 仍優先。
+          allow-licenses: |
+            MIT
+            Apache-2.0
+            BSD-2-Clause
+            BSD-3-Clause
+            ISC
+          deny-licenses: |
+            AGPL-3.0
+            GPL-1.0
+            GPL-2.0
+            GPL-3.0
+            LGPL-3.0
+            SSPL-1.0
+
+          # 嚴重度門檻：發現 >= 設定等級 (critical/high/medium/low) 的漏洞會失敗
+          fail-on-severity: critical
+
+          # 只檢查 runtime 相依 (避免 dev-only 套件阻擋)；可用: runtime, development, optional, peer
+          fail-on-scopes: runtime
+
+          # 啟用漏洞檢查 (true 預設)；若只想做 license 可以改 false
+          vulnerability-check: true
+
+          # 在 PR 留言摘要，方便審閱者快速看結果
+          comment-summary-in-pr: true
+
+          # Maximum number of results to show per category (預設 25，可依需要調整)
+          # max-entries: 50
+
+          # 可用來排除特定檔案 (glob)；此示例為保留空白
+          # allow-ghsas: |
+          #   GHSA-xxxx-xxxx-xxxx
+
+      - name: 結果說明 (若需額外記錄)
+        run: |
+          echo "若此工作失敗，表示有不允許的 License 或超過嚴重度門檻的漏洞。"
+          echo "調整策略：修改 deny-licenses / allow-licenses 或修補相依套件版本。"
