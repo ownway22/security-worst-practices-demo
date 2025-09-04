@@ -1,0 +1,14 @@
+{
+  "name": "insecure-demo",
+  "version": "1.0.0",
+  "description": "Intentionally insecure demo",
+  "main": "insecure_server.js",
+  "scripts": {
+    "start": "node insecure_server.js"
+  },
+  "dependencies": {
+    "express": "4.16.0",  // outdated
+    "jsonwebtoken": "7.1.9",  // vulnerable
+    "lodash": "4.17.11"  // vulnerable versions
+  }
+}

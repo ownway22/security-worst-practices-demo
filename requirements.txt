@@ -1,0 +1,3 @@
+Flask==1.0  # outdated vulnerable version
+pyjwt==1.7.1  # known vulnerabilities
+requests==2.19.0  # outdated
