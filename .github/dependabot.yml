@@ -1,0 +1,49 @@
+# 簡單的 Dependabot 設定檔 (Demo 用)
+# 參考文件: https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  # 1) GitHub Actions 工作流程相依套件 (如 actions/checkout)
+  - package-ecosystem: "github-actions"
+    directory: "/"            # 專案根目錄
+    schedule:
+      interval: "weekly"      # 每週檢查一次 (可改 daily / monthly)
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - security
+    commit-message:
+      prefix: "deps(actions)"
+
+  # 2) Python 套件 (pip) - 若有 requirements.txt / requirements/*.txt
+  - package-ecosystem: "pip"
+    directory: "/"            # 若套件檔在子資料夾可再新增一組設定
+    schedule:
+      interval: "weekly"
+    allow:                     # 只針對直接相依 (direct)；移除此區塊則全部
+      - dependency-type: "direct"
+    labels:
+      - dependencies
+    commit-message:
+      prefix: "deps(pip)"
+      include: "scope"
+    # ignore 範例 (Demo)：假設不想升級到 2.x 版以上
+    ignore:
+      - dependency-name: "example-lib"
+        versions: [">=2.0.0"]
+
+  # 3) (選用) NPM/Node 專案示範；若沒有 package.json 可刪除此區塊
+  # - package-ecosystem: "npm"
+  #   directory: "/"
+  #   schedule:
+  #     interval: "weekly"
+  #   labels:
+  #     - dependencies
+  #   commit-message:
+  #     prefix: "deps(npm)"
+
+# 使用說明 (Demo 重點):
+# - 每週自動產生 PR，更新 GitHub Actions 與 pip 相依套件。
+# - commit message 會加上自訂前綴，方便篩選。
+# - 可依需要調整 interval 為 daily / monthly。
+# - 若專案有多個語言或子資料夾，可複製區塊並修改 directory。
