@@ -1,0 +1,38 @@
+# Python / uv / Node / Terraform ignore patterns
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.venv/
+.uv/
+uv.lock
+
+# Environment / secrets (DO NOT COMMIT REAL ONES)
+.env
+.env.local
+*.pem
+*.key
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage / reports
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Terraform local state
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Docker artifacts
+*.tar
+
+# OS
+.DS_Store
+Thumbs.db
