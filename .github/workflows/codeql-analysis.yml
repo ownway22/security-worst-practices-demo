@@ -59,3 +59,13 @@ jobs:
       uses: github/codeql-action/analyze@v3
       with:
         category: '/language:${{matrix.language}}'
+        # 將 SARIF 輸出到每個語言獨立資料夾，便於後續上傳 Artifact
+        output: sarif-${{ matrix.language }}
+
+    - name: Upload SARIF artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: codeql-sarif-${{ matrix.language }}
+        path: sarif-${{ matrix.language }}/*.sarif
+        if-no-files-found: error
+        retention-days: 7
