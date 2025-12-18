@@ -4,7 +4,7 @@ This repository is intentionally insecure for demonstration purposes. The items 
 
 ## Application-level vulnerabilities
 - `app.py`
-  - SQL injection in `/user` due to string concatenation of queries.
+  - SQL injection in `/user` due to string concatenation of a query.
   - Weak hash (MD5) for passwords.
   - Hard-coded JWT signing key plus AWS access keys and GCP service account key.
   - Command injection in `/ping` (`subprocess.getoutput`) and Flask debug server bound to `0.0.0.0` (exposes service on all interfaces).
@@ -16,8 +16,8 @@ This repository is intentionally insecure for demonstration purposes. The items 
 
 ## Dependency risks
 
-- `requirements.txt`: Outdated/vulnerable packages (e.g., `Flask 2.2.5`, `PyJWT 2.4.0`).
-- `package.json`: Outdated/vulnerable packages (`express 4.16.0`, `jsonwebtoken 7.1.9`, `lodash 4.17.11`).
+- `requirements.txt`: Outdated/vulnerable packages (e.g., `Flask 2.2.5` – CVE-2023-30861; `PyJWT 2.4.0` – algorithm confusion issues).
+- `package.json`: Outdated/vulnerable packages (`express 4.16.0` – prototype pollution CVEs; `jsonwebtoken 7.1.9` – signature validation bypass CVE-2022-23529; `lodash 4.17.11` – prototype pollution CVEs).
 - `Dockerfile`: Base image may contain known CVEs without patching.
 
 ## Infrastructure & configuration issues
@@ -32,4 +32,6 @@ This repository is intentionally insecure for demonstration purposes. The items 
 - Secret demo files: `demo_exposed_secrets.txt`, `orig_secret_snapshot.txt`, and `secret_formats_demo.md` contain realistic-looking tokens/keys for scanner testing.
 
 ## Reporting a vulnerability
-Real vulnerabilities should be reported privately to the maintainers (use GitHub Security Advisories: Security > Advisories > “Report a vulnerability” rather than opening public issues). Do not deploy this repository to production. Rotate and revoke any real credentials accidentally committed.
+- Report real vulnerabilities privately via GitHub Security Advisories (Security > Advisories > “Report a vulnerability”); avoid public issues.
+- Do not deploy this repository to production.
+- Rotate and revoke any real credentials accidentally committed.
