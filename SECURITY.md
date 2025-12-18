@@ -31,4 +31,4 @@ This repository is intentionally insecure for demonstration purposes. The items 
 - Secret demo files: `demo_exposed_secrets.txt`, `orig_secret_snapshot.txt`, and `secret_formats_demo.md` contain realistic-looking tokens/keys for scanner testing.
 
 ## Reporting a vulnerability
-Real vulnerabilities should be reported privately to the maintainers. Do not deploy this repository to production; rotate and revoke any real credentials accidentally committed.
+Real vulnerabilities should be reported privately to the maintainers (use GitHub Security Advisories: Security > Advisories > “Report a vulnerability” rather than opening public issues). Do not deploy this repository to production; rotate and revoke any real credentials accidentally committed.
