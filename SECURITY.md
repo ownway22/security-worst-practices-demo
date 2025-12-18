@@ -7,7 +7,7 @@ This repository is intentionally insecure for demonstration purposes. The items 
   - SQL injection in `/user` due to string concatenation of queries.
   - Weak hash (MD5) for passwords.
   - Hard-coded JWT signing key plus AWS access keys and GCP service account key.
-  - Command injection in `/ping` (`subprocess.getoutput`) and Flask debug server bound to `0.0.0.0`.
+  - Command injection in `/ping` (`subprocess.getoutput`) and Flask debug server bound to `0.0.0.0` (exposes service on all interfaces).
 - `insecure_server.js`
   - Command injection via `/exec` and arbitrary code execution via `/eval` endpoint (uses `eval`).
   - Hard-coded Stripe/RSA secrets and unsecured HTTP listener (`0.0.0.0:3000`).
@@ -31,4 +31,4 @@ This repository is intentionally insecure for demonstration purposes. The items 
 - Secret demo files: `demo_exposed_secrets.txt`, `orig_secret_snapshot.txt`, and `secret_formats_demo.md` contain realistic-looking tokens/keys for scanner testing.
 
 ## Reporting a vulnerability
-Real vulnerabilities should be reported privately to the maintainers (use GitHub Security Advisories: Security > Advisories > “Report a vulnerability” rather than opening public issues). Do not deploy this repository to production; rotate and revoke any real credentials accidentally committed.
+Real vulnerabilities should be reported privately to the maintainers (use GitHub Security Advisories: Security > Advisories > “Report a vulnerability” rather than opening public issues). Do not deploy this repository to production. Rotate and revoke any real credentials accidentally committed.
