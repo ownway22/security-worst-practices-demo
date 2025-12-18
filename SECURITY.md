@@ -17,9 +17,15 @@ This repository is intentionally insecure for demonstration purposes. The items 
 
 ## Dependency risks
 
-- `requirements.txt`: Outdated/vulnerable packages (e.g., `Flask 2.2.5` – CVE-2023-30861; `PyJWT 2.4.0` – algorithm confusion issues).
-- `package.json`: Outdated/vulnerable packages (`express 4.16.0` – outdated dependencies with ReDoS risk, e.g., `fresh` CVE-2017-16119; `jsonwebtoken 7.1.9` – signature validation bypass CVE-2022-23529; `lodash 4.17.11` – prototype pollution CVE-2019-10744 / CVE-2020-8203).
-- `Dockerfile`: Base image may contain known CVEs without patching.
+- `requirements.txt`
+  - `Flask 2.2.5` – CVE-2023-30861.
+  - `PyJWT 2.4.0` – algorithm confusion issues.
+- `package.json`
+  - `express 4.16.0` – outdated dependencies with ReDoS risk (e.g., `fresh` CVE-2017-16119).
+  - `jsonwebtoken 7.1.9` – signature validation bypass (CVE-2022-23529).
+  - `lodash 4.17.11` – prototype pollution (CVE-2019-10744 / CVE-2020-8203).
+- `Dockerfile`
+  - Base image may contain known CVEs without patching.
 
 ## Infrastructure & configuration issues
 - `main.tf`
