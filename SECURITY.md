@@ -5,10 +5,10 @@ This repository is intentionally insecure for demonstration purposes. The items 
 ## Application-level vulnerabilities
 - `app.py`
   - SQL injection in `/user` due to string concatenation of queries.
-  - Weak hash (MD5) for passwords and hard-coded JWT/AWS/GCP secrets.
+  - Weak hash (MD5) for passwords and hard-coded JWT signing key plus AWS access keys and GCP service account key.
   - Command injection in `/ping` (`subprocess.getoutput`) and Flask debug server bound to `0.0.0.0`.
 - `insecure_server.js`
-  - Command injection via `/exec` and arbitrary code execution via `/eval` using `eval`.
+  - Command injection via `/exec` and arbitrary code execution via `/eval` endpoint (uses `eval`).
   - Hard-coded Stripe/RSA secrets and unsecured HTTP listener (`0.0.0.0:3000`).
 - `Dockerfile`
   - Outdated base image (`python:3.8-slim`), hard-coded `SECRET_TOKEN`, and runs as root without user hardening.
@@ -19,7 +19,7 @@ This repository is intentionally insecure for demonstration purposes. The items 
 - `Dockerfile`: Base image may contain known CVEs without patching.
 
 ## Infrastructure & configuration issues
-- `main.tf`: Hard-coded cloud credentials, public blob access enabled, HTTPS-only disabled, and missing tagging/governance controls.
+- `main.tf`: Hard-coded cloud credentials, public blob access enabled, HTTPS-only transport disabled (`enable_https_traffic_only = false`), and missing tagging/governance controls.
 
 ## Exposed secret material (demo/fake values)
 - Hard-coded credentials or keys in `app.py`, `insecure_server.js`, `Dockerfile`, and `main.tf`.
