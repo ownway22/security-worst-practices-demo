@@ -22,7 +22,7 @@ This repository is intentionally insecure for demonstration purposes. The items 
   - `PyJWT 2.4.0` – algorithm confusion issues.
 
 - `package.json`:
-  - `express 4.16.0` – outdated dependencies with ReDoS risk (e.g., `fresh` regex DoS advisory such as SNYK-JS-FRESH-174238).
+  - `express 4.16.0` – outdated dependencies with ReDoS risk (e.g., `fresh` regex DoS advisory like SNYK-JS-FRESH-174238).
   - `jsonwebtoken 7.1.9` – signature validation bypass (CVE-2022-23529).
   - `lodash 4.17.11` – prototype pollution (CVE-2019-10744 / CVE-2020-8203).
 
@@ -43,5 +43,6 @@ This repository is intentionally insecure for demonstration purposes. The items 
 ## Reporting a vulnerability
 - Because this repo intentionally ships insecure patterns, only report unintended real credentials or vulnerabilities not already documented here.
 - Report real vulnerabilities privately via GitHub Security Advisories (Security > Advisories > “Report a vulnerability”). Avoid public issues.
+- Maintainers will aim to acknowledge valid private reports within 14 days.
 - Do not deploy this repository to production.
 - Rotate and revoke any real credentials accidentally committed.
