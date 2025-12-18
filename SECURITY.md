@@ -4,10 +4,11 @@ This repository is intentionally insecure for demonstration purposes. The items 
 
 ## Application-level vulnerabilities
 - `app.py`
-  - SQL injection in `/user` due to string concatenation of a query.
+  - SQL injection in `/user` due to string concatenation of an SQL query.
   - Weak hash (MD5) for passwords.
   - Hard-coded JWT signing key plus AWS access keys and GCP service account key.
-  - Command injection in `/ping` (`subprocess.getoutput`) and Flask debug server bound to `0.0.0.0` (exposes service on all interfaces).
+  - Command injection in `/ping` (`subprocess.getoutput`).
+  - Flask debug server bound to `0.0.0.0` (exposes service on all interfaces).
 - `insecure_server.js`
   - Command injection via `/exec` and arbitrary code execution via `/eval` endpoint (uses `eval`).
   - Hard-coded Stripe/RSA secrets and unsecured HTTP listener (`0.0.0.0:3000`).
