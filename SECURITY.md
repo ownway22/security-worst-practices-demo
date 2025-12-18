@@ -15,6 +15,7 @@ This repository is intentionally insecure for demonstration purposes. The items 
   - Outdated base image (`python:3.8-slim`), hard-coded `SECRET_TOKEN`, and runs as root without user hardening.
 
 ## Dependency risks
+
 - `requirements.txt`: Outdated/vulnerable packages (e.g., `Flask 2.2.5`, `PyJWT 2.4.0`).
 - `package.json`: Outdated/vulnerable packages (`express 4.16.0`, `jsonwebtoken 7.1.9`, `lodash 4.17.11`).
 - `Dockerfile`: Base image may contain known CVEs without patching.
