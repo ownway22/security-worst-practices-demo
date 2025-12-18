@@ -17,14 +17,16 @@ This repository is intentionally insecure for demonstration purposes. The items 
 
 ## Dependency risks
 
-- `requirements.txt`
+- `requirements.txt`:
   - `Flask 2.2.5` – CVE-2023-30861.
   - `PyJWT 2.4.0` – algorithm confusion issues.
-- `package.json`
+
+- `package.json`:
   - `express 4.16.0` – outdated dependencies with ReDoS risk (e.g., `fresh` CVE-2017-16119).
   - `jsonwebtoken 7.1.9` – signature validation bypass (CVE-2022-23529).
   - `lodash 4.17.11` – prototype pollution (CVE-2019-10744 / CVE-2020-8203).
-- `Dockerfile`
+
+- `Dockerfile`:
   - Base image may contain known CVEs without patching.
 
 ## Infrastructure & configuration issues
@@ -39,6 +41,6 @@ This repository is intentionally insecure for demonstration purposes. The items 
 - Secret demo files: `demo_exposed_secrets.txt`, `orig_secret_snapshot.txt`, and `secret_formats_demo.md` contain realistic-looking tokens/keys for scanner testing.
 
 ## Reporting a vulnerability
-- Report real vulnerabilities privately via GitHub Security Advisories (Security > Advisories > “Report a vulnerability”); avoid public issues.
+- Report real vulnerabilities privately via GitHub Security Advisories (Security > Advisories > “Report a vulnerability”). Avoid public issues.
 - Do not deploy this repository to production.
 - Rotate and revoke any real credentials accidentally committed.
